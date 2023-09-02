@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    body{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        height: 100vh;
+        {% comment %} background:radial-gradient(rgb(24, 216, 241),rgb(11, 97, 227),rgb(24, 2, 61)); {% endcomment %}
+    }
+    .container{
+        max-width: 650px;
+        padding: 28px;
+        margin: 0 28px;
+        box-shadow: 0 15px 25px;
+        max-height: 700px;
+    }
+    h1{
+        font-size: 26px;
+        font-weight: 600;
+        text-align: left;
+        color: rgb(112, 94, 68);
+        padding-bottom: 8px;
+        border-bottom: 1px solid black;
+    }
+    .content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+    .input-box{
+        display: flex;
+        width: 50%;
+        flex-wrap: wrap;
+        padding-bottom: 15px;
+    }
+    .input-box:nth-child(2n){
+        justify-content: end;
+    }
+    .input-box label, .gender-title{
+        width: 95%;
+        color: rgb(64, 103, 90);
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    .gender-title{
+        font-size: 16px;
+    }
+    .input-box input{
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid rgb(27, 19, 19);
+        outline: none;
+    }
+    .input-box input:is(:focus,:valid){
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    .gender-catagory{
+        color: gray;
+    }
+    .gender-catagory label{
+        padding: 0 28px 0 5px;
+        font-size: 14px;
+    }
+    .gender-catagory label,.gender-catagory input{
+        cursor: pointer;
+    }
+    .alert p{
+        font-size: 14px;
+        font-style: italic;
+        margin: 5px 0;
+        padding: 10px;
+        color: dimgray;
+    }
+    .alert a{
+        text-decoration: none;
+    }
+    .alert {
+       text-align: center;
+    }
+    .alert a:hover{
+        text-decoration: underline;
+    }
+    .button-container{
+        margin: 15px 0;
+    }
+    .button-container button{
+        width: 600px;
+        margin-top: 10px;
+        padding: 10px;
+        display: block;
+        font-size: 20px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        background-image: linear-gradient(to right, #aa067b, #61045f);
+    }
+    .button-container button:hover{
+        background-image: linear-gradient(to right, #61045f, #aa067b);
+    }
+
+    .xyz {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        background-color: #f44336;
+        color: white;
+        padding: 20px;
+        margin: 20px;
+        transition: transform 0.3s ease-in-out;
+      }
+      
+      .xyz.show {
+        transform: translate(-50%, -50%);
+      }
+      
+      .close-btn {
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .close-btn:hover {
+        color: black;
+      }
+      
+      .xyz p {
+        margin: 0;
+      }
+      
+      .xyz.show + * {
+        margin-bottom: 80px;
+      }
+</style>
+<body>
+    
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong></strong>{{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <h1>Registration</h1>
+            <div class="content">
+                <div class="input-box">
+                    <label for="name">Full Name</label>
+                    <input type="text" placeholder="Enter Full Name" name="name" required>
+                </div>
+                <div class="input-box">
+                    <label for="Username">Username</label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+                </div>
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="Enter your email" name="email" required>
+                </div>
+                <div class="input-box">
+                    <label for="Phonenumber">Phone Number</label>
+                    <input type="tel" placeholder="Enter your Phone Number" name="contact" required>
+                </div>
+                <div class="input-box">
+                    <label for="Password">Password</label>
+                    <input type="password" placeholder="Enter yor new password" name="password1" required>
+                </div>
+                <div class="input-box">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" placeholder="Confirm Your password" name="password2" required>
+                </div>
+                <span class="gender-title">Gender</span>
+                <div class="gender-catagory">
+                    <input type="radio" name="Gender" id="male">
+                    <label for="gender">Male</label>
+                    <input type="radio" name="Gender" id="female">
+                    <label for="gender">Female</label>
+                    <input type="radio" name="Gender" id="Other">
+                    <label for="gender">Other</label>
+                </div>
+                <div class="alert">
+                    <p>By clicking on sign up,you agree to our <a href="">term</a>, <a href="">Privacy policy</a> and <a href=""> cookies policy</a>,you may receive SMS Notification
+                    </p>
+                </div>
+                <div class="button-container">
+                    <button type="submit" href = '/login'>Register </button>
+                </div>
+                
+            </div>
+        </form>
+        
+    </div>
+   
+</body>
+</html>
